@@ -1,7 +1,7 @@
 require('dotenv').config();                             // Load biến môi trường từ .env
 const mongoose = require('mongoose');
 
-const dbstate = [{
+const dbState = [{
     value: 0,
     label: "Disconnected"
 },

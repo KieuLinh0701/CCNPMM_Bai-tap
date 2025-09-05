@@ -1,4 +1,4 @@
-import axios from './axios. customize';
+import axios from './axios.customize';
 
 const createUserApi = (name, email, password) => {
     const URL_API = "/v1/api/register";
@@ -24,6 +24,19 @@ const getUserApi = () => {
     return axios.get(URL_API)
 }
 
+const getProductsApi = (category, page = 1, limit = 10) => {
+  const URL_API = "/v1/api/products";
+  const params = { page, limit };
+  if (category) {
+    params.category = category;
+  }
+  return axios.get(URL_API, { params });
+};
+
+const getCategoriesApi = () => {
+  return axios.get("/v1/api/categories");
+};
+
 export {
-    createUserApi, loginApi, getUserApi
+    createUserApi, loginApi, getUserApi, getProductsApi, getCategoriesApi
 }

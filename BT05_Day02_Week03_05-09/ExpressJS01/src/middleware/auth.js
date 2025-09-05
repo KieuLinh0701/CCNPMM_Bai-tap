@@ -2,7 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
-    const white_lists = ["/", "/register", "/login"];
+    const white_lists = ["/", "/register", "/login", "/products"];
 
     // Kiểm tra whitelist, hỗ trợ URL con
     if (white_lists.some(item => req.originalUrl.startsWith(`/v1/api${item}`))) {
