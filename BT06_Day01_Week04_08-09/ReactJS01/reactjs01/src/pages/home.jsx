@@ -28,7 +28,7 @@ const HomePage = () => {
         console.log("Danh mục sau khi parse:", data);
 
         if (Array.isArray(data)) {
-          setCategories(["All", ...data]); // thêm "All" vào đầu mảng
+          setCategories(["All", ...data]); 
         } else {
           console.error("API categories không trả về mảng:", data);
           setCategories(["All"]);
