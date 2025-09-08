@@ -24,12 +24,10 @@ const getUserApi = () => {
     return axios.get(URL_API)
 }
 
-const getProductsApi = (category, page = 1, limit = 10) => {
+const getProductsApi = (category, page = 1, limit = 3) => {
   const URL_API = "/v1/api/products";
   const params = { page, limit };
-  if (category) {
-    params.category = category;
-  }
+  if (category) params.category = category;
   return axios.get(URL_API, { params });
 };
 

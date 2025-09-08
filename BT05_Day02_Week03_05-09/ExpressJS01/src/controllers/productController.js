@@ -2,7 +2,7 @@ const Product = require('../models/product');
 
 // Lấy sản phẩm theo category, có phân trang
 const getProductsByCategory = async (req, res) => {
-  const { category, page = 1, limit = 10 } = req.query;
+  const { category, page = 1, limit = 3 } = req.query;
 
   const pageNumber = parseInt(page);
   const pageSize = parseInt(limit);
