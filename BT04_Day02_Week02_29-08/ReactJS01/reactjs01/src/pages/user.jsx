@@ -4,17 +4,29 @@ import { getUserApi } from "../util/api";
 
 const UserPage = () => {
   const [dataSource, setDataSource] = useState([]);
-
   useEffect(() => {
     const fetchUser = async () => {
       const res = await getUserApi();
+      console.log("API response:", res);
       if (!res?.message) {
         setDataSource(res);
       } else {
         notification.error({
           message: "Unauthorized",
-          description: res.message,
+          description: res.message
         });
+      }
+    }
+    fetchUser();
+  }, [])
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getUserApi();
+        console.log("API response:", res);
+      } catch (error) {
+        console.error(error);
       }
     };
     fetchUser();
@@ -36,19 +48,18 @@ const UserPage = () => {
     {
       title: 'Role',
       dataIndex: 'role',
-    },
+    }
   ];
 
   return (
     <div style={{ padding: 30 }}>
       <Table
         bordered
-        dataSource={dataSource}
-        columns={columns}
+        dataSource={dataSource} columns={columns}
         rowKey={"_id"}
       />
     </div>
-  );
-};
+  )
+}
 
 export default UserPage;
