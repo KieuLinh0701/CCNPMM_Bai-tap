@@ -11,28 +11,34 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(true);
 
-  // Lấy danh mục từ backend
-  const fetchCategories = async () => {
-    try {
-      const res = await getCategoriesApi();
-      const data = res?.data || res || [];
-      setCategories(["All", ...data]);
-    } catch (err) {
-      console.error("Lỗi lấy danh mục:", err);
-    }
-  };
-
   // Lấy sản phẩm theo category
   const fetchProducts = async (category = null) => {
     setLoading(true);
     try {
       const catParam = category === "All" ? null : category;
-      const res = await getProductsApi(catParam, 1, 12);
+      const res = await getProductsApi(catParam, 1, 12); 
       setProducts(res?.data || []);
     } catch (err) {
       console.error("Lỗi lấy sản phẩm:", err);
+      setProducts([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Lấy danh mục từ backend
+  const fetchCategories = async () => {
+    try {
+      const data = await getCategoriesApi();
+      if (Array.isArray(data)) {
+        setCategories(["All", ...data]);
+      } else {
+        console.error("API categories không trả về mảng:", data);
+        setCategories(["All"]);
+      }
+    } catch (err) {
+      console.error("Lỗi lấy danh mục:", err);
+      setCategories(["All"]);
     }
   };
 

@@ -33,8 +33,9 @@ const getProductsApi = (category, page = 1, limit = 10) => {
   return axios.get(URL_API, { params });
 };
 
-const getCategoriesApi = () => {
-  return axios.get("/v1/api/categories");
+const getCategoriesApi = async () => {
+  const res = await axios.get("/v1/api/categories");
+  return res.categories || []; 
 };
 
 export {
