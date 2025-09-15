@@ -16,7 +16,27 @@ async function createIndex() {
     if (!exists) {
       await client.indices.create({
         index: 'products',
-        body: {
+        body: { body: {
+          settings: {
+            analysis: {
+              analyzer: {
+                folding: {
+                  tokenizer: 'standard',
+                  filter: ['lowercase', 'asciifolding']
+                }
+              }
+            }
+          },
+          settings: {
+            analysis: {
+              analyzer: {
+                folding: {
+                  tokenizer: 'standard',
+                  filter: ['lowercase', 'asciifolding']
+                }
+              }
+            }
+          },
           mappings: {
             properties: {
               name: { type: 'text' },          // tìm kiếm
@@ -27,7 +47,7 @@ async function createIndex() {
               views: { type: 'integer' },      // lượt xem
             }
           }
-        }
+        }}
       });
       console.log('✅ Index "products" created');
     } else {

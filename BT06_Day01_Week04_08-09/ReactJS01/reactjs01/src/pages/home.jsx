@@ -16,7 +16,7 @@ const HomePage = () => {
 
   const [searchText, setSearchText] = useState('');
   const [priceRange, setPriceRange] = useState([0, 50]);
-  const [sortByViews, setSortByViews] = useState(null);
+  const [sortByViews, setSortByViews] = useState("desc");
 
   const pageSize = 3;
 
@@ -110,11 +110,26 @@ const HomePage = () => {
           placeholder="Sắp xếp lượt xem"
           style={{ width: 180 }}
           allowClear
+          value={sortByViews}
           onChange={setSortByViews}
         >
           <Option value="asc">Tăng dần</Option>
           <Option value="desc">Giảm dần</Option>
         </Select>
+
+        {/* Nút bỏ lọc */}
+        <Button
+          danger
+          onClick={() => {
+            setSelectedCategory("All");
+            setSearchText("");
+            setPriceRange([0, 50]);
+            setSortByViews(null);
+            value={sortByViews}
+          }}
+        >
+          Bỏ lọc
+        </Button>
       </Space>
 
       {loading ? (
